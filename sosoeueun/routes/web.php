@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
-Route::get('/calendar', function () {
-    return view('calendar');
-});
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
 
-Route::get('/checkList', function () {
-    return view('checkList');
-});
+Route::get('/', [CalendarController::class, 'index']);
