@@ -1,40 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>vue js practice</title>
-</head>
-<body>
-    
-    <div id="app">
-        <input type="text" id="user_id" v-model="userId">
-        <input type="password" id="user_password" v-model="userPassword">
-        <button type="button">로그인</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <br>
-        아이디 : {{ userId }}
-        <br>
-        비밀번호 : {{ userPassword }}
-    </div>
+        <title>vue js practice</title>
+    </head>
+    <body>
 
-    <!-- vue js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <div id="app">
+            <!-- <input type="text" id="user_id" v-model="userId"> <input type="password"
+            id="user_password" v-model="userPassword"> <button type="button">로그인</button>
+            <br> 아이디 : {{ userId }} <br> 비밀번호 : {{ userPassword }} -->
 
-    <script>
-        new Vue({
-            el:'#app',
-            data() {
-                return {
-                    userId:'',
-                    userPassword:'',
+            <ul style="list-style: none;">
+                <li v-for="item in items">
+                    {{ item.id }}
 
+                    <img :src="item.image">
+
+                    {{ item.title }}
+                </li>
+            </ul>
+
+            <template v-for="item in items">
+                <li>
+                    {{ item.id }}
+
+                    <img :src="item.image">
+                </li>
+                <li>{{ item.title }}</li>
+            </template>
+
+        </div>
+
+        <!-- vue js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        // userId:'', userPassword:'',
+
+                        items: [
+                            {
+                                id: 1,
+                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
+                                title: '나무'
+                            }, {
+                                id: 2,
+                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
+                                title: '나무'
+                            }, {
+                                id: 3,
+                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
+                                title: '나무'
+                            }, {
+                                id: 4,
+                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
+                                title: '나무'
+                            }
+                        ]
+
+                    }
                 }
-            },
-        })
-    </script>
+            })
+        </script>
 
-</body>
+    </body>
 </html>
