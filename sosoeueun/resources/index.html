@@ -7,32 +7,34 @@
 
         <title>vue js practice</title>
     </head>
+
+<style>
+    .drodown ul{
+        display: none;
+        list-style: none;
+        margin: 0;
+        border: 1px solid black;
+        padding: 10px;
+        width: 200px;
+    }
+
+    .drodown.on ul{
+        display: block;
+    }
+
+</style>
+
     <body>
 
         <div id="app">
-            <!-- <input type="text" id="user_id" v-model="userId"> <input type="password"
-            id="user_password" v-model="userPassword"> <button type="button">로그인</button>
-            <br> 아이디 : {{ userId }} <br> 비밀번호 : {{ userPassword }} -->
-
-            <ul style="list-style: none;">
-                <li v-for="item in items">
-                    {{ item.id }}
-
-                    <img :src="item.image">
-
-                    {{ item.title }}
-                </li>
-            </ul>
-
-            <template v-for="item in items">
-                <li>
-                    {{ item.id }}
-
-                    <img :src="item.image">
-                </li>
-                <li>{{ item.title }}</li>
-            </template>
-
+            <!-- <img :src="image" :id="`thumbnail_${id}"> -->
+            <div :class="[dropdown, toggle]">
+                <ul>
+                    <li><a href="#">메뉴1</a></li>
+                    <li><a href="#">메뉴2</a></li>
+                </ul>
+                
+            </div>
         </div>
 
         <!-- vue js CDN -->
@@ -43,29 +45,21 @@
                 el: '#app',
                 data() {
                     return {
-                        // userId:'', userPassword:'',
+                        image: 'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8' +
+                                'MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
+                        style: {
+                            background: 'red',
+                            fontSize: '10px',
+                            fontFamily: 'dotum'
+                        },
 
-                        items: [
-                            {
-                                id: 1,
-                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
-                                title: '나무'
-                            }, {
-                                id: 2,
-                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
-                                title: '나무'
-                            }, {
-                                id: 3,
-                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
-                                title: '나무'
-                            }, {
-                                id: 4,
-                                image: 'https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg',
-                                title: '나무'
-                            }
-                        ]
+                        dropdown: 'dropdown',
 
-                    }
+                        toggle: {
+                            on: false
+                        }
+
+                    };
                 }
             })
         </script>
