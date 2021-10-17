@@ -9,32 +9,14 @@
     </head>
 
 <style>
-    .drodown ul{
-        display: none;
-        list-style: none;
-        margin: 0;
-        border: 1px solid black;
-        padding: 10px;
-        width: 200px;
-    }
 
-    .drodown.on ul{
-        display: block;
-    }
 
 </style>
 
     <body>
 
         <div id="app">
-            <!-- <img :src="image" :id="`thumbnail_${id}"> -->
-            <div :class="[dropdown, toggle]">
-                <ul>
-                    <li><a href="#">메뉴1</a></li>
-                    <li><a href="#">메뉴2</a></li>
-                </ul>
-                
-            </div>
+         <button type="button" v-on:click="add">더하기</button>
         </div>
 
         <!-- vue js CDN -->
@@ -45,22 +27,14 @@
                 el: '#app',
                 data() {
                     return {
-                        image: 'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8' +
-                                'MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
-                        style: {
-                            background: 'red',
-                            fontSize: '10px',
-                            fontFamily: 'dotum'
-                        },
-
-                        dropdown: 'dropdown',
-
-                        toggle: {
-                            on: false
-                        }
-
+                     counter:0
                     };
-                }
+                },
+                methods: {
+                    add(){
+                        console.log(this.counter);
+                    }
+                },
             })
         </script>
 
