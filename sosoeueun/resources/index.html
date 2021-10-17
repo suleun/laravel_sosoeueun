@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>vue js practice</title>
+</head>
+<body>
+    
+    <div id="app">
+        <input type="text" id="user_id" v-model="userId">
+        <input type="password" id="user_password" v-model="userPassword">
+        <button type="button">로그인</button>
+
+        <br>
+        아이디 : {{ userId }}
+        <br>
+        비밀번호 : {{ userPassword }}
+    </div>
+
+    <!-- vue js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data() {
+                return {
+                    userId:'',
+                    userPassword:'',
+
+                }
+            },
+        })
+    </script>
+
+</body>
+</html>
