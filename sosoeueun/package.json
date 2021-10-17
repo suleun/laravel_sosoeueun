@@ -28,11 +28,13 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "tailwindcss": "^2.0.1",
-        "vue": "^3.0.5",
+        "vue": "^3.2.20",
         "vue-loader": "^16.1.2",
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "googleapis": "^39.2.0"
+        "bootstrap-vue": "^2.21.2",
+        "googleapis": "^39.2.0",
+        "v-calendar": "^3.0.0-alpha.6"
     }
 }
