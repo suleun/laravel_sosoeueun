@@ -8,15 +8,33 @@
         <title>vue js practice</title>
     </head>
 
-<style>
-
-
-</style>
+    <style></style>
 
     <body>
 
         <div id="app">
-         <button type="button" v-on:click="add">더하기</button>
+            <button type="button" @click="add">더하기</button>
+            {{ counter }}
+
+            <input type="text" @keyup.enter="keyUp">
+
+            <br>
+
+            <button type="button" @click="btnClick">
+                버튼
+            </button>
+
+            <div :class="[dropdown, toggle]">
+                <ul>
+                    <li>
+                        <a>메뉴1</a>
+                    </li>
+                    <li>
+                        <a>메뉴2</a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
 
         <!-- vue js CDN -->
@@ -27,14 +45,37 @@
                 el: '#app',
                 data() {
                     return {
-                     counter:0
+                        counter: 0,
+                        style: {
+                            background: 'red'
+                        },
+
+                        dropdown: 'dropdown',
+                        toggle: {
+                            on: false
+                        }
+
                     };
                 },
                 methods: {
-                    add(){
-                        console.log(this.counter);
+                    add() {
+                        this.counter++;
+                    },
+
+                    ketUp(ev) {
+                        if (ev.KeyCode !== 13) {
+                            console.log('엔터키 아님');
+                            return;
+                        }
+
+                        console.log('엔터키 눌림');
+                    },
+
+                    btnClick() {
+                    this.toggle.on =! this.toggle.on;
                     }
-                },
+
+                }
             })
         </script>
 
