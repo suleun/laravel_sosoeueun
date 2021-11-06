@@ -27,3 +27,9 @@
         }
     }
 </script>
+
+<style>
+div{
+    padding: 3%;
+}
+</style>
