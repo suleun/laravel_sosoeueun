@@ -6,22 +6,26 @@
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-12 w-2/3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                    <section>
-
+                    <section class=" bg-secondary-lite md:p-16">
                         <calendar-container/>
                     </section>
 
                 </div>
             </div>
         </div>
+        <aside class="bg-white rounded-xl p-4 shadow-xl mt-4 w-1/3 top-0 right-0">
 
-        <aside>
-            <todo-list-container/>
             <todo-list-month-container/>
+        </aside>
+
+        <aside class="bg-white rounded-xl p-4 shadow-xl mt-4 w-1/3 bottom-0 right-0">
+
+            <todo-list-container/>
+
         </aside>
 
     </app-layout>
