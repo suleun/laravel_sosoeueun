@@ -1,26 +1,14 @@
 <template>
 
-    <h1>오늘 할 일</h1>
+    <h1>취미</h1>
 
+        <div>
+            
     <input
         type="checkbox"
-        for="toDay"
-        class="appearance-none checked:bg-blue-600 checked:border-transparent">
-        <label for="toDay">오늘 할 일</label>
-
-        <section class="container mx-auto p-4">
-            <label
-                for="checkbox"
-                class="relative flex-inline items-center isolate p-4 rounded-2xl">
-                <input
-                    id="checkbox"
-                    type="checkbox"
-                    class="relative peer z-20 text-purple-600 rounded-md focus:ring-0"/>
-                <span class="ml-2 relative z-20">Checkbox Selection</span>
-                <div
-                    class="absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border rounded-2xl"></div>
-            </label>
-        </section>
+        class="appearance-none checked:bg-blue-600 checked:border-transparent mx-2">
+            <label v-for="hobby in hobbies" :key="hobby.id">{{ hobby.content }}</label>
+        </div>
 
         <br>
 
@@ -41,6 +29,14 @@
 
             export default defineComponent({
                 components: {},
+
+                data(){
+                    return {
+                        today: '2021-11-29',
+                        content: '',
+                        hobbies: [],
+                    }
+                },
 
                 methods: {
                     Certified() {
@@ -65,20 +61,40 @@
                     },
 
                     plus() {
-                    
-                     Swal.fire({
-                        title: '할일을 추가하세요',
-                        input: 'text',
-                        inputAttributes: {
-                            autocapitalize: 'off'
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: 'plus',
-                        showLoaderOnConfirm: true,
-                        
-                        
+                        Swal.fire({
+                            title: '할일을 추가하세요',
+                            input: 'text',
+                            inputAttributes: {
+                                autocapitalize: 'off'
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: 'plus',
+                            showLoaderOnConfirm: true,
+                        }).then((res) => {
+                            axios.post('/todolist/store', {
+                                today: this.today,
+                                content: res.value
+                            }).then((res) => {
+                                console.log(res.data)
+                            }).catch((err) => {
+                                console.error(err)
+                            })
                         })
+                    },
+
+                    getHobby(){
+                            axios.get('/todolist/show')
+                            .then((res) => {
+                                console.log(res.data)
+                                this.hobbies = res.data
+                            }).catch((err) => {
+                                console.error(err)
+                            })
                     }
+                },
+
+                created() {
+                    this.getHobby()
                 }
             })
         </script>

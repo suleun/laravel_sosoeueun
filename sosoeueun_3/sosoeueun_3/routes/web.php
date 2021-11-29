@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,3 +28,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/todolist', function () {
+    return Inertia::render('components/ToDoList');
+})->name('ToDoList');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/todolist/store', [TodosController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/todolist/show', [TodosController::class, 'show']);
