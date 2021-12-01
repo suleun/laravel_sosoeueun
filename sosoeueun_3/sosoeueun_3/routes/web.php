@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TodoHobbysController;
+use App\Http\Controllers\TodoMController;
 use App\Http\Controllers\TodosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,5 +35,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/todolist', function () {
     return Inertia::render('components/ToDoList');
 })->name('ToDoList');
 
+// ToDo
 Route::middleware(['auth:sanctum', 'verified'])->post('/todolist/store', [TodosController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/todolist/show', [TodosController::class, 'show']);
+
+// ToDoM
+Route::middleware(['auth:sanctum', 'verified'])->post('/todomlist/store', [TodoMController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/todomlist/show', [TodoMController::class, 'show']);
+
+// ToHobby
+Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/store', [TodoHobbysController::class, 'store']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/show', [TodoHobbysController::class, 'show']);
+

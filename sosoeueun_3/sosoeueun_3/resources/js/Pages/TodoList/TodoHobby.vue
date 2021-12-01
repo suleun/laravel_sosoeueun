@@ -2,12 +2,12 @@
 
     <h1>취미</h1>
 
-        <div>
-            
-    <input
-        type="checkbox"
-        class="appearance-none checked:bg-blue-600 checked:border-transparent mx-2">
-            <label v-for="hobby in hobbies" :key="hobby.id">{{ hobby.content }}</label>
+        <div v-for="hobby in hobbies" :key="hobby.id">
+
+        <input
+            type="checkbox"
+            class="appearance-none checked:bg-blue-600 checked:border-transparent mx-2">
+            <label >{{ hobby.content }}</label>
         </div>
 
         <br>
@@ -30,12 +30,8 @@
             export default defineComponent({
                 components: {},
 
-                data(){
-                    return {
-                        today: '2021-11-29',
-                        content: '',
-                        hobbies: [],
-                    }
+                data() {
+                    return {today: '2021-11-29', content: '', hobbies: []}
                 },
 
                 methods: {
@@ -61,36 +57,44 @@
                     },
 
                     plus() {
-                        Swal.fire({
-                            title: '할일을 추가하세요',
-                            input: 'text',
-                            inputAttributes: {
-                                autocapitalize: 'off'
-                            },
-                            showCancelButton: true,
-                            confirmButtonText: 'plus',
-                            showLoaderOnConfirm: true,
-                        }).then((res) => {
-                            axios.post('/todolist/store', {
-                                today: this.today,
-                                content: res.value
-                            }).then((res) => {
-                                console.log(res.data)
-                            }).catch((err) => {
-                                console.error(err)
+                        Swal
+                            .fire({
+                                title: '취미를 추가하세요',
+                                input: 'text',
+                                inputAttributes: {
+                                    autocapitalize: 'off'
+                                },
+                                showCancelButton: true,
+                                confirmButtonText: 'plus',
+                                showLoaderOnConfirm: true
                             })
-                        })
+                            .then((res) => {
+                                axios
+                                    .post('/tohobbylist/store', {
+                                        today: this.today,
+                                        content: res.value
+                                    })
+                                    .then((res) => {
+                                        console.log(res.data)
+                                        this.getHobby();
+                                    })
+                                    .catch((err) => {
+                                        console.error(err)
+                                    })
+                                })
                     },
 
-                    getHobby(){
-                            axios.get('/todolist/show')
+                    getHobby() {
+                        axios
+                            .get('/tohobbylist/show')
                             .then((res) => {
                                 console.log(res.data)
                                 this.hobbies = res.data
-                            }).catch((err) => {
+                            })
+                            .catch((err) => {
                                 console.error(err)
                             })
-                    }
+                        }
                 },
 
                 created() {
