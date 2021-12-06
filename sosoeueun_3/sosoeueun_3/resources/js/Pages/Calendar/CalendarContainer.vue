@@ -10,8 +10,8 @@
     import FullCalendar from '@fullcalendar/vue3'
     import dayGridPlugin from '@fullcalendar/daygrid'
     import interactionPlugin from '@fullcalendar/interaction'
-
     import {defineComponent} from 'vue'
+
     export default defineComponent({
 
         components: {
@@ -24,20 +24,22 @@
                         dayGridPlugin, interactionPlugin
                     ],
                     initialView: 'dayGridMonth',
-         
-                headerToolbar: {
+                    selectable: true ,
+
+                    headerToolbar: {
                         left: 'today',
                         center: 'title',
                         right: 'prev,next'
                     },
 
                     editable: true,
-        selectable: true,
-        dayMaxEvents: true,
-
+                    selectable: true,
+                    dayMaxEvents: true,
+                    locale: 'ko'
                 }
             }
-        }
+        },
+     
 
     })
 </script>

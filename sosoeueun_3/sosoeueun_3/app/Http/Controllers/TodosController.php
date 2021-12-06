@@ -74,9 +74,17 @@ class TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Todo $todo)
     {
-        //
+
+        $todo->finished = 1;
+
+        $todo->save();
+
+        return response()->json([
+            'message' => 'delete success'
+        ]);
+
     }
 
     /**
@@ -85,8 +93,12 @@ class TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Todo $todo)
     {
-        //
+        $todo->delete();
+
+        return response()->json([
+            'message' => 'delete success'
+        ]);
     }
 }

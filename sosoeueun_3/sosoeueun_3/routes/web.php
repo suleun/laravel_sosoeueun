@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TodoHobbysController;
+use App\Http\Controllers\TodoListController;
 use App\Http\Controllers\TodoMController;
 use App\Http\Controllers\TodosController;
 use Illuminate\Foundation\Application;
@@ -38,6 +39,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/todolist', function () {
 // ToDo
 Route::middleware(['auth:sanctum', 'verified'])->post('/todolist/store', [TodosController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/todolist/show', [TodosController::class, 'show']);
+Route::middleware(['auth:sanctum', 'verified'])->delete('/todolist/destroy/{todo}', [TodosController::class, 'destroy']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/todolist/update/{todo}', [TodosController::class, 'update']);
 
 // ToDoM
 Route::middleware(['auth:sanctum', 'verified'])->post('/todomlist/store', [TodoMController::class, 'store']);
@@ -47,3 +50,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/todomlist/show', [TodoMCo
 Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/store', [TodoHobbysController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/show', [TodoHobbysController::class, 'show']);
 
+//ToDoList
+Route::middleware(['auth:sanctum', 'verified'])->get('/todolistl/show', [TodoListController::class, 'show']);
