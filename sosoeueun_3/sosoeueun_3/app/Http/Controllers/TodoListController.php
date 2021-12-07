@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TodoListController extends Controller
 {
@@ -14,7 +15,7 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -45,8 +46,10 @@ class TodoListController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
-        return Todo::all();
+    {   
+        $count = Todo::all()->count();
+        $count2 = Todo::where('finished', 1)->get()->count();
+        return Inertia::render('components/ToDoList', ['todos'=>Todo::all(), 'dos'=>$count, 'finish'=>$count2]);
     }
 
     /**

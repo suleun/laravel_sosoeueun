@@ -14,7 +14,7 @@ class TodoHobbysController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -73,9 +73,15 @@ class TodoHobbysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ToHobby $tohobby)
     {
-        //
+        $tohobby->finished = 1;
+
+        $tohobby->save();
+
+        return response()->json([
+            'message' => 'delete success'
+        ]);
     }
 
     /**

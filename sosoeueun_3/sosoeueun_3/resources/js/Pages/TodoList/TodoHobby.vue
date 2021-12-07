@@ -2,10 +2,11 @@
 
     <h1>취미</h1>
 
-        <div v-for="hobby in hobbies" :key="hobby.id">
-
+    <div v-for="hobby in hobbies" :key="hobby.id">
         <input
-            type="checkbox"
+            type="radio"
+            :value="hobby.id"
+            v-model="checked"
             class="appearance-none checked:bg-blue-600 checked:border-transparent mx-2">
             <label >{{ hobby.content }}</label>
         </div>
@@ -15,10 +16,12 @@
             <div class="mt-2">
                 <button
                     @click="plus"
-                    class="p-2 pl-5 mx-2 pr-5 bg-transparent border-2 border-blue-500 text-blue-500 text-lg rounded-lg hover:bg-blue-500 hover:text-gray-100 focus:border-4 focus:border-blue-300">할일 추가</button>
+                    class="p-2 pl-5 mx-2 pr-5 bg-transparent border-2 border-blue-500 text-blue-500 text-lg rounded-lg hover:bg-blue-500 hover:text-gray-100 focus:border-4 focus:border-blue-300">취미 추가</button>
                 <button
                     @click="Certified"
-                    class="p-2 pl-5 pr-5 bg-transparent border-2 border-green-500 text-green-500 text-lg rounded-lg hover:bg-green-500 hover:text-gray-100 focus:border-4 focus:border-green-300">할일 완료</button>
+                    class="p-2 pl-5 pr-5 bg-transparent border-2 border-green-500 text-green-500 text-lg rounded-lg hover:bg-green-500 hover:text-gray-100 focus:border-4 focus:border-green-300">
+                    수행
+                </button>
 
             </div>
         </template>
@@ -31,29 +34,35 @@
                 components: {},
 
                 data() {
-                    return {today: '2021-11-29', content: '', hobbies: []}
+
+                    let date = new Date();
+
+                    return {today: date, content: '', hobbies: [], checked: null}
                 },
 
                 methods: {
                     Certified() {
-                        const {value: file} = Swal.fire({
-                            title: 'Select image',
-                            input: 'file',
-                            inputAttributes: {
-                                'accept': 'image/*',
-                                'aria-label': 'Upload your profile picture'
-                            }
-                        })
+                        Swal
+                            .fire({
+                                title: `${this
+                                    .hobbies
+                                    .find(v => v.id == this.checked)
+                                    .content}`,
+                                text: "기록하러 가보죠!",
+                                icon: 'success',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'YES'
+                            })
+                            .then((result) => {
+                                if (result.isConfirmed) {
 
-                        if (file) {
-                            const reader = new FileReader()
-                            reader.onload = (e) => {
-                                Swal.fire(
-                                    {title: 'Your uploaded picture', imageUrl: e.target.result, imageAlt: 'The uploaded picture'}
-                                )
-                            }
-                            reader.readAsDataURL(file)
-                        }
+                                    this
+                                        .$inertia
+                                        .visit('/todolist');
+                                }
+                            })
                     },
 
                     plus() {

@@ -32,9 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/todolist', function () {
-    return Inertia::render('components/ToDoList');
-})->name('ToDoList');
+Route::middleware(['auth:sanctum', 'verified'])->get('/todolist', [TodoListController::class, 'show'])->name('ToDoList');
 
 // ToDo
 Route::middleware(['auth:sanctum', 'verified'])->post('/todolist/store', [TodosController::class, 'store']);
@@ -49,6 +47,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/todomlist/show', [TodoMCo
 // ToHobby
 Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/store', [TodoHobbysController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/show', [TodoHobbysController::class, 'show']);
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/create', [TodoHobbysController::class, 'create']);
 
 //ToDoList
 Route::middleware(['auth:sanctum', 'verified'])->get('/todolistl/show', [TodoListController::class, 'show']);

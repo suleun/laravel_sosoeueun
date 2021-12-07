@@ -1,13 +1,13 @@
 <template>
     <app-layout title="Completion">
         <template #header>
-            {{ $page.props.user.name }} 님이 한 일
+            {{ $page.props.user.name }}
+            님이 한 일
         </template>
 
         <div class="bg-white rounded-xl p-4 shadow-xl mt-4 mx-4">
 
             <div>
-                달에 한 일 : 한 횟수 / 달 수
 
                 <link
                     rel="stylesheet"
@@ -54,19 +54,12 @@
                                                     </th>
                                                     <td
                                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                                        30/32
+                                                        {{ finish }}/{{ dos }}
                                                     </td>
                                                     <td
                                                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                         <div class="flex items-center">
-                                                            <span class="mr-2">60%</span>
-                                                            <div class="relative w-full">
-                                                                <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                                                    <div
-                                                                        style="width: 60%"
-                                                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
-                                                                </div>
-                                                            </div>
+                                                            <span class="mr-2">{{ finish/dos*100 }}%</span>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -81,7 +74,6 @@
                     </div>
                     <br>
                         <div>
-                            하루에 한 일 : 게시판 형태로
                             <section class="py-1 bg-blueGray-50">
 
                                 <!-- component -->
@@ -96,22 +88,18 @@
                                                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">날짜</th>
                                                     <th
                                                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">완료 된 일</th>
-                                                    <th class="px-6 py-3 border-b-2 border-gray-300"></th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white">
                                                 <tr v-for="todo in todos" :key="todo.id">
-                                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                                        <div class="flex items-center">
-                                                            <div>
-                                                                <div class="text-sm leading-5 text-gray-800">{{todo.content}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                                        <div class="text-sm leading-5 text-blue-900">{{todo.today}}</div>
-                                                    </td>
+                                                        <td v-if="todo.finished == 1" class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                            {{todo.content}}
 
+                                                        </td>
+                                                        <td v-if="todo.finished == 1" class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                            {{todo.today}}
+                                                        </td>
                                                 </tr>
 
                                             </tbody>
@@ -161,26 +149,21 @@
                         import AppLayout from '@/Layouts/AppLayout.vue'
 
                         export default defineComponent({
+                            props: [
+                                'todos', 'dos', 'finish'
+                            ],
                             components: {
                                 AppLayout
                             },
 
                             data() {
-                                return {today: '', content: '', todos: []}
+                                // return {today: '', content: '', todos: []}
                             },
                             mounted() {
-                                axios.get('/todolistl/show')
-                                 .then((res) => {
-                                console.log(res.data)
-                                this.todos = res.data
-                            })
-                            .catch((err) => {
-                                console.error(err)
-                            })
+                                // axios.get('/todolistl/show')         .then((res) => { console.log(res.data)
+                                // this.todos = res.data }) .catch((err) => { console.error(err) })
                             },
 
-                            methods(){
-                             
-                            }
+                            methods() {}
                         })
                     </script>
