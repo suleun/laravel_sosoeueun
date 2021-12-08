@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ToHobby;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TodoHobbysController extends Controller
 {
@@ -24,7 +25,7 @@ class TodoHobbysController extends Controller
      */
     public function create()
     {
-        
+        return Inertia::render('components/hobbyForm');
     }
 
     /**

@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/todomlist/show', [TodoMCo
 Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/store', [TodoHobbysController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/show', [TodoHobbysController::class, 'show']);
 
-Route::middleware(['auth:sanctum', 'verified'])->post('/tohobbylist/create', [TodoHobbysController::class, 'create']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/create', [TodoHobbysController::class, 'create']);
 
 //ToDoList
 Route::middleware(['auth:sanctum', 'verified'])->get('/todolistl/show', [TodoListController::class, 'show']);

@@ -85,21 +85,47 @@
                                             <thead>
                                                 <tr>
                                                     <th
-                                                        class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">날짜</th>
-                                                    <th
                                                         class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">완료 된 일</th>
-                                                    
+                                                    <th
+                                                        class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">날짜</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white">
                                                 <tr v-for="todo in todos" :key="todo.id">
-                                                        <td v-if="todo.finished == 1" class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                                            {{todo.content}}
+                                                    <td
+                                                        v-if="todo.finished == 1"
+                                                        class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                        {{todo.content}}
 
-                                                        </td>
-                                                        <td v-if="todo.finished == 1" class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                                            {{todo.today}}
-                                                        </td>
+                                                    </td>
+                                                    <td
+                                                        v-if="todo.finished == 1"
+                                                        class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                        {{todo.today}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th
+                                                        class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-red-500 tracking-wider">완료 못 한일</th>
+                                                    <th
+                                                        class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-red-500 tracking-wider">날짜</th>
+
+                                                </tr>
+
+                                                <tr v-for="todo in todos" :key="todo.id">
+                                                    <td
+                                                        v-if="todo.finished == 0"
+                                                        class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                        {{todo.content}}
+
+                                                    </td>
+                                                    <td
+                                                        v-if="todo.finished == 0"
+                                                        class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                        {{todo.today}}
+                                                    </td>
                                                 </tr>
 
                                             </tbody>
