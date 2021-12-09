@@ -10,7 +10,7 @@
             <input
                 :value="todom.id"
                 v-model="checked"
-                type="radio"
+                type="checkbox"
                 class="appearance-none checked:bg-blue-600 checked:border-transparent mx-2">
                 <label>{{ todom.content }}</label>
             </div>

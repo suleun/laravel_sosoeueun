@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ToHobby;
+use App\Models\HobbyPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-class TodoHobbysController extends Controller
+class HobbyPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class TodoHobbysController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -23,8 +24,10 @@ class TodoHobbysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $hobbyId)
     {
+
+        return Inertia::render('components/hobbyForm', ['hobbyId' => $hobbyId]);
     }
 
     /**
@@ -36,12 +39,19 @@ class TodoHobbysController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'today' => 'required',
-            'content' => 'required',]);
+            'to_hobbies_id' => 'required',
+            'image' => 'required',
+            'comment' => 'required',]);
 
-        ToHobby::create($validated);
+        // 이미지를 파일 시스템의 특정 위치에 저장
+        $path = $request->image->store('images', 'public');
 
-        return redirect()->route('dashboard');
+        // 요청정보에서($request) 필요한 데이터를 꺼내 DB에 저장
+        $data = array_merge($validated, ['image'=>$path]);
+
+        HobbyPost::create($data);
+
+        return Redirect::route('ToDoList'); 
     }
 
     /**
@@ -50,9 +60,9 @@ class TodoHobbysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        return ToHobby::all();
+        //
     }
 
     /**
@@ -73,15 +83,9 @@ class TodoHobbysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ToHobby $tohobby)
+    public function update(Request $request, $id)
     {
-        $tohobby->finished = 1;
-
-        $tohobby->save();
-
-        return response()->json([
-            'message' => 'delete success'
-        ]);
+        //
     }
 
     /**

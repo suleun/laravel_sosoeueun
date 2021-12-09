@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\HobbyPostController;
 use App\Http\Controllers\TodoHobbysController;
 use App\Http\Controllers\TodoListController;
 use App\Http\Controllers\TodoMController;
 use App\Http\Controllers\TodosController;
+use App\Models\HobbyPost;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -52,3 +54,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tohobbylist/create', [Tod
 
 //ToDoList
 Route::middleware(['auth:sanctum', 'verified'])->get('/todolistl/show', [TodoListController::class, 'show']);
+
+//ToHobbyPost
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/post/create/{hobbyId}', [HobbyPostController::class, 'create']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/post/store', [HobbyPostController::class, 'store'])->name('post.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/post/show', [HobbyPostController::class, 'show']);

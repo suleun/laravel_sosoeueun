@@ -60,7 +60,7 @@
 
                                     this
                                         .$inertia
-                                        .visit('/tohobbylist/create');
+                                        .visit(`/post/create/${this.checked}`);
                                 }
                             })
                     },

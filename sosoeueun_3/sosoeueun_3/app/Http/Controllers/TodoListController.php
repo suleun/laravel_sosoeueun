@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HobbyPost;
 use App\Models\Todo;
+use App\Models\ToHobby;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -49,7 +51,8 @@ class TodoListController extends Controller
     {   
         $count = Todo::all()->count();
         $count2 = Todo::where('finished', 1)->get()->count();
-        return Inertia::render('components/ToDoList', ['todos'=>Todo::all(), 'dos'=>$count, 'finish'=>$count2]);
+
+        return Inertia::render('components/ToDoList', ['todos'=>Todo::all(), 'dos'=>$count, 'finish'=>$count2, 'hobbies'=>HobbyPost::all(), 'to_hobbies'=>ToHobby::all()]);
     }
 
     /**
